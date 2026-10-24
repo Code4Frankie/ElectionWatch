@@ -3,7 +3,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { useSession } from '@/lib/useSession';
 import Shell from '@/components/Shell';
-import { LGAS, label } from '@/lib/constants';
+import { useGeo } from '@/lib/useGeo';
+import { label } from '@/lib/constants';
 
 const ROLES = ['observer', 'moderator', 'admin'];
 const ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'; // no look-alike characters
@@ -15,6 +16,7 @@ function genPassword() {
 
 export default function Users() {
   const me = useSession();
+  const { states } = useGeo();
   const [users, setUsers] = useState([]);
   const [role, setRole] = useState('observer');
   const [pw, setPw] = useState('');
@@ -32,7 +34,7 @@ export default function Users() {
     const f = new FormData(e.currentTarget);
     const body = {
       name: f.get('name'), email: f.get('email'), role, password: f.get('password'),
-      assignedLgas: role === 'moderator' ? f.getAll('lga') : [],
+      assignedStates: role === 'moderator' ? f.getAll('state') : [],
     };
     if (f.get('phone')) body.phone = f.get('phone');
     try {
@@ -84,8 +86,8 @@ export default function Users() {
           </label>
         </div>
         {role === 'moderator' && (
-          <fieldset className="lgas"><legend>LGAs this moderator reviews (none ticked = all)</legend>
-            {LGAS.map((l) => <label key={l}><input type="checkbox" name="lga" value={l} /> {l}</label>)}
+          <fieldset className="lgas"><legend>States this moderator reviews (none ticked = national)</legend>
+            {states.map((s) => <label key={s}><input type="checkbox" name="state" value={s} /> {s}</label>)}
           </fieldset>
         )}
         <button className="btn" disabled={busy}>{busy ? 'Creating…' : 'Create user'}</button>
@@ -93,12 +95,12 @@ export default function Users() {
 
       <div className="scroll">
         <table>
-          <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>LGAs</th><th>Status</th><th></th></tr></thead>
+          <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>States</th><th>Status</th><th></th></tr></thead>
           <tbody>
             {users.map((u) => (
               <tr key={u._id}>
                 <td>{u.name}</td><td>{u.email}</td><td>{label(u.role)}</td>
-                <td>{u.role === 'moderator' ? (u.assignedLgas.join(', ') || 'All') : '-'}</td>
+                <td>{u.role === 'moderator' ? (u.assignedStates.join(', ') || 'National') : '-'}</td>
                 <td><span className={`pill ${u.isActive ? 'st-verified' : 'st-rejected'}`}>{u.isActive ? 'Active' : 'Deactivated'}</span></td>
                 <td className="actions">
                   <button className="btn ghost" onClick={() => resetPw(u)}>Reset password</button>

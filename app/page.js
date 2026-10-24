@@ -33,7 +33,7 @@ export default function Landing() {
       <main>
         <section className="hero wrap">
           <div>
-            <p className="eyebrow">Nasarawa State pilot · 2027 elections</p>
+            <p className="eyebrow">Nigeria · 2027 elections</p>
             <h1>Every incident from every polling unit, in one place.</h1>
             <p className="lead">Voter Witness gives accredited observers a fast way to report election incidents by web, SMS or phone, and gives reviewers one queue to verify them and act.</p>
             <p className="btns">
@@ -45,7 +45,7 @@ export default function Landing() {
             <p className="tag">Example report</p>
             <p className="meta">Intimidation · High severity · SMS</p>
             <p>Group of men blocking the queue at the gate and turning voters away.</p>
-            <p className="muted">Karu LGA · polling unit code on file</p>
+            <p className="muted">Karu LGA, Nasarawa · polling unit code on file</p>
             <p><span className="pill st-under_review">Under review</span> <span className="ref-sm">VW-K7QM-3XPD</span></p>
           </aside>
         </section>
@@ -74,7 +74,7 @@ export default function Landing() {
 
         <section className="band">
           <div className="wrap cols4">
-            <div><b>13 LGAs</b><span>covered by the Nasarawa pilot</span></div>
+            <div><b>774 LGAs</b><span>across all 36 states and the FCT</span></div>
             <div><b>Role-based</b><span>observers see only their own reports</span></div>
             <div><b>Audited</b><span>every status change is recorded</span></div>
             <div><b>Evidence</b><span>photos, video and audio attach to the report</span></div>
@@ -84,7 +84,7 @@ export default function Landing() {
 
       <footer className="wrap foot">
         <img src="/logo.png" alt="Voter Witness" width="150" />
-        <p className="muted">Voter Witness 2027 · Nasarawa State pilot. Access is for accredited observers and authorised reviewers; accounts are issued by administrators.</p>
+        <p className="muted">Voter Witness 2027 · Nigeria. Access is for accredited observers and authorised reviewers; accounts are issued by administrators.</p>
       </footer>
     </>
   );

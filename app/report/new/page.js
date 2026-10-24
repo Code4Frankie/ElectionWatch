@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { api } from '@/lib/api';
 import { useSession } from '@/lib/useSession';
 import Shell from '@/components/Shell';
-import { LGAS, CATEGORIES, SEVERITIES, label } from '@/lib/constants';
+import { useGeo } from '@/lib/useGeo';
+import { CATEGORIES, SEVERITIES, label } from '@/lib/constants';
 
 export default function NewReport() {
   const user = useSession();
+  const { states, lgasOf } = useGeo();
+  const [state, setState] = useState('');
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(null);
@@ -64,10 +67,16 @@ export default function NewReport() {
               {SEVERITIES.map((s) => <option key={s} value={s}>{label(s)}</option>)}
             </select>
           </label>
+          <label className="field">State
+            <select name="state" required value={state} onChange={(e) => setState(e.target.value)}>
+              <option value="" disabled>Choose a state</option>
+              {states.map((s) => <option key={s}>{s}</option>)}
+            </select>
+          </label>
           <label className="field">LGA
-            <select name="lga" required defaultValue="">
-              <option value="" disabled>Choose an LGA</option>
-              {LGAS.map((l) => <option key={l}>{l}</option>)}
+            <select name="lga" required defaultValue="" key={state} disabled={!state}>
+              <option value="" disabled>{state ? 'Choose an LGA' : 'Choose a state first'}</option>
+              {lgasOf(state).map((l) => <option key={l}>{l}</option>)}
             </select>
           </label>
           <label className="field">Ward (optional)<input name="ward" maxLength={100} /></label>

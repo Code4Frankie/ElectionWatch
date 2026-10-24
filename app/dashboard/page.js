@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { api } from '@/lib/api';
 import { useSession } from '@/lib/useSession';
 import Shell from '@/components/Shell';
-import { LGAS, CATEGORIES, SEVERITIES, STATUSES, label } from '@/lib/constants';
+import { useGeo } from '@/lib/useGeo';
+import { CATEGORIES, SEVERITIES, STATUSES, label } from '@/lib/constants';
 
 export default function Dashboard() {
   const user = useSession();
+  const { states, lgasOf } = useGeo();
   const [filters, setFilters] = useState({});
   const [page, setPage] = useState(1);
   const [data, setData] = useState({ items: [], total: 0, limit: 25 });
@@ -31,6 +33,7 @@ export default function Dashboard() {
 
   if (!user) return null;
   const set = (k) => (e) => { setPage(1); setFilters((f) => ({ ...f, [k]: e.target.value })); };
+  const setState = (e) => { setPage(1); setFilters((f) => ({ ...f, state: e.target.value, lga: '' })); };
   const pages = Math.max(1, Math.ceil(data.total / data.limit));
 
   return (
@@ -50,7 +53,8 @@ export default function Dashboard() {
         <select aria-label="Status" onChange={set('status')}><option value="">All statuses</option>{STATUSES.map((s) => <option key={s} value={s}>{label(s)}</option>)}</select>
         <select aria-label="Severity" onChange={set('severity')}><option value="">All severities</option>{SEVERITIES.map((s) => <option key={s} value={s}>{label(s)}</option>)}</select>
         <select aria-label="Type" onChange={set('category')}><option value="">All types</option>{Object.entries(CATEGORIES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
-        <select aria-label="LGA" onChange={set('lga')}><option value="">All LGAs</option>{LGAS.map((l) => <option key={l}>{l}</option>)}</select>
+        <select aria-label="State" value={filters.state || ''} onChange={setState}><option value="">All states</option>{states.map((s) => <option key={s}>{s}</option>)}</select>
+        <select aria-label="LGA" value={filters.lga || ''} onChange={set('lga')} disabled={!filters.state}><option value="">All LGAs</option>{lgasOf(filters.state).map((l) => <option key={l}>{l}</option>)}</select>
         <select aria-label="Channel" onChange={set('channel')}><option value="">All channels</option><option value="web">Web</option><option value="sms">SMS</option><option value="voice">Voice</option></select>
         <input aria-label="Search" placeholder="Search text" onKeyDown={(e) => e.key === 'Enter' && set('q')(e)} />
       </div>
@@ -64,7 +68,7 @@ export default function Dashboard() {
               <tr key={r._id} className={`sev-${r.severity}`}>
                 <td><Link href={`/dashboard/${r._id}`}>{r.refCode}</Link></td>
                 <td>{CATEGORIES[r.category]}</td>
-                <td>{r.location.lga}{r.location.ward ? `, ${r.location.ward}` : ''}</td>
+                <td>{r.location.unresolved ? 'Location unresolved' : `${r.location.lga}, ${r.location.state}`}{r.location.ward ? ` · ${r.location.ward}` : ''}</td>
                 <td>{label(r.channel)}{r.reporterVerified ? '' : ' (unverified)'}</td>
                 <td><span className={`pill st-${r.status}`}>{label(r.status)}</span></td>
                 <td>{new Date(r.createdAt).toLocaleString()}</td>

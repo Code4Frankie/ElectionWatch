@@ -40,7 +40,7 @@ export default function ReportDetail() {
             <p className="meta">{CATEGORIES[r.category]} · {label(r.severity)} severity · {label(r.channel)} · {new Date(r.createdAt).toLocaleString()}</p>
             <p>{r.description}</p>
             <p className="muted">
-              {r.location.lga}{r.location.ward && `, ${r.location.ward}`}{r.location.pollingUnitCode && ` · PU ${r.location.pollingUnitCode}`}
+              {r.location.unresolved ? 'Location unresolved' : `${r.location.lga}, ${r.location.state}`}{r.location.ward && ` · ${r.location.ward}`}{r.location.pollingUnitCode && ` · PU ${r.location.pollingUnitCode}`}
               {r.location.geo?.coordinates && (<> · <a target="_blank" rel="noreferrer" href={`https://www.google.com/maps?q=${r.location.geo.coordinates[1]},${r.location.geo.coordinates[0]}`}>Open map</a></>)}
             </p>
             {staff && <p className="muted">Reporter: {r.reporter?.name || r.reporterPhone || 'Unknown'}{!r.reporterVerified && ' (unverified sender)'}</p>}
