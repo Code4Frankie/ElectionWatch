@@ -1,4 +1,4 @@
-# ElectWatch 2027 - Frontend (Next.js)
+# Voter Witness 2027 - Frontend (Next.js)
 
 ```bash
 cp .env.example .env.local   # point NEXT_PUBLIC_API_URL at the backend (/api included)

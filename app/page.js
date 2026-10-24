@@ -5,13 +5,13 @@ import { session } from '@/lib/api';
 
 const CHANNELS = [
   { name: 'Web form', tone: 'blue', text: 'Describe the incident, pick the LGA, attach photos, video or audio, and share your GPS position. Best when you have data and a few minutes.' },
-  { name: 'SMS', tone: 'green', text: 'No data? Text the report. You get a reference code back by SMS.', code: 'EW <polling unit code> VIOLENCE Thugs at the gate' },
+  { name: 'SMS', tone: 'green', text: 'No data? Text the report. You get a reference code back by SMS.', code: 'VW <polling unit code> VIOLENCE Thugs at the gate' },
   { name: 'Hotline', tone: 'navy', text: 'Call the hotline and describe what you see. A moderator reviews the recording and places the report. The number is issued to accredited observers.' },
 ];
 
 const STEPS = [
   ['Report', 'An observer files the incident by web, SMS or phone call.'],
-  ['Reference', 'Every report gets a short code such as EW-K7QM-3XPD, so it can be followed up.'],
+  ['Reference', 'Every report gets a short code such as VW-K7QM-3XPD, so it can be followed up.'],
   ['Review', 'Moderators move it from new to under review, then verified, escalated or resolved. Rejections and escalations need a written reason.'],
   ['Record', 'Each status change and note is kept in the report history.'],
 ];
@@ -25,7 +25,7 @@ export default function Landing() {
   return (
     <>
       <header className="bar">
-        <Link href="/" className="brandlink"><img src="/mark.png" alt="" width="44" height="33" /> <strong>ElectWatch</strong></Link>
+        <Link href="/" className="brandlink"><img src="/logo.png" alt="Voter Witness" /></Link>
         <nav><a href="#channels">Ways to report</a><a href="#how">How it works</a></nav>
         <Link className="btn" href={href}>{cta}</Link>
       </header>
@@ -35,7 +35,7 @@ export default function Landing() {
           <div>
             <p className="eyebrow">Nasarawa State pilot · 2027 elections</p>
             <h1>Every incident from every polling unit, in one place.</h1>
-            <p className="lead">ElectWatch gives accredited observers a fast way to report election incidents by web, SMS or phone, and gives reviewers one queue to verify them and act.</p>
+            <p className="lead">Voter Witness gives accredited observers a fast way to report election incidents by web, SMS or phone, and gives reviewers one queue to verify them and act.</p>
             <p className="btns">
               <Link className="btn big" href={href}>{cta}</Link>
               <a className="btn big ghost" href="#how">How it works</a>
@@ -46,7 +46,7 @@ export default function Landing() {
             <p className="meta">Intimidation · High severity · SMS</p>
             <p>Group of men blocking the queue at the gate and turning voters away.</p>
             <p className="muted">Karu LGA · polling unit code on file</p>
-            <p><span className="pill st-under_review">Under review</span> <span className="ref-sm">EW-K7QM-3XPD</span></p>
+            <p><span className="pill st-under_review">Under review</span> <span className="ref-sm">VW-K7QM-3XPD</span></p>
           </aside>
         </section>
 
@@ -83,8 +83,8 @@ export default function Landing() {
       </main>
 
       <footer className="wrap foot">
-        <img src="/logo.png" alt="ElectWatch" width="150" />
-        <p className="muted">ElectWatch 2027 · Nasarawa State pilot. Access is for accredited observers and authorised reviewers; accounts are issued by administrators.</p>
+        <img src="/logo.png" alt="Voter Witness" width="150" />
+        <p className="muted">Voter Witness 2027 · Nasarawa State pilot. Access is for accredited observers and authorised reviewers; accounts are issued by administrators.</p>
       </footer>
     </>
   );

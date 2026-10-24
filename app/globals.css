@@ -65,3 +65,16 @@ code{display:block;margin-top:.8rem;background:#eef1f4;padding:.55rem .7rem;bord
 .cols4 b{display:block;font-size:1.5rem}.cols4 span{opacity:.85}
 .foot{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;padding-top:2rem;padding-bottom:2rem}.foot p{margin:0;max-width:38rem}
 @media (max-width:760px){.hero{grid-template-columns:1fr;padding-top:2rem}.bar nav{display:none}}
+
+/* ---- admin users ---- */
+.mono{font-family:ui-monospace,Consolas,monospace}
+.row{display:flex;gap:.5rem}.row input{flex:1}
+.creds{border-left-color:var(--green)}.creds b{font-size:1.1rem}
+.lgas{border:1px solid var(--line);border-radius:4px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.4rem .8rem;padding:.7rem}
+.lgas legend{font-weight:700;padding:0 .3rem}.lgas label{font-weight:400;display:flex;gap:.4rem;align-items:center}.lgas input{width:auto}
+
+/* ---- Voter Witness brand ---- */
+:root{--ink:#0a2463;--accent:#05409a;--red:#e4000f}
+.brandlink img{height:40px;width:auto;display:block}
+.eyebrow{color:var(--red)}.chan.green{border-top-color:var(--red)}
+.login-logo{width:240px}

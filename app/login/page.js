@@ -24,7 +24,7 @@ export default function Login() {
 
   return (
     <main className="login">
-      <Link href="/"><img src="/logo.png" alt="ElectWatch" className="login-logo" /></Link>
+      <Link href="/"><img src="/logo.png" alt="Voter Witness" className="login-logo" /></Link>
       <h1>Sign in</h1>
       <p className="muted">For accredited observers and authorised reviewers. Accounts are issued by your administrator.</p>
       <form onSubmit={submit} className="stack">

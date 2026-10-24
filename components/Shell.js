@@ -13,10 +13,11 @@ export default function Shell({ user, children }) {
   return (
     <>
       <header className="bar">
-        <Link href="/" className="brandlink"><img src="/mark.png" alt="" width="40" height="30" /> <strong>ElectWatch</strong></Link>
+        <Link href="/" className="brandlink"><img src="/logo.png" alt="Voter Witness" /></Link>
         <nav>
           <Link href="/report/new">New report</Link>
           <Link href="/dashboard">{user.role === 'observer' ? 'My reports' : 'Reports'}</Link>
+          {user.role === 'admin' && <Link href="/admin/users">Users</Link>}
         </nav>
         <span className="who">{user.name}</span>
         <button className="btn ghost" onClick={out}>Log out</button>
